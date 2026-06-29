@@ -1,15 +1,19 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
 
 export default function SignContractPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const contractDraftId = params?.contract_draft_id as string;
+  const requestId = params?.contract_draft_id as string;  // This is actually request_id now
+  const token = searchParams?.get('token');
 
+  const [signatureRequest, setSignatureRequest] = useState<any>(null);
   const [contract, setContract] = useState<any>(null);
-  const [signatureRequests, setSignatureRequests] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [signing, setSigning] = useState(false);
   const [error, setError] = useState('');
@@ -19,8 +23,13 @@ export default function SignContractPage() {
   const [isDrawing, setIsDrawing] = useState(false);
 
   useEffect(() => {
-    loadContractAndRequests();
-  }, [contractDraftId]);
+    if (!token) {
+      setError('Invalid signature request link - missing access token');
+      setLoading(false);
+      return;
+    }
+    loadSignatureRequest();
+  }, [requestId, token]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,22 +43,30 @@ export default function SignContractPage() {
     context.strokeStyle = '#1A1A18';
   }, []);
 
-  const loadContractAndRequests = async () => {
+  const loadSignatureRequest = async () => {
     try {
+      // Load signature request details
+      const reqRes = await fetch(`${API_URL}/signature-requests/request/${requestId}`);
+      if (!reqRes.ok) throw new Error('Signature request not found');
+      const reqData = await reqRes.json();
+      setSignatureRequest(reqData);
+
       // Load contract draft
-      const contractRes = await fetch(`http://localhost:8000/api/v1/contract-drafts/${contractDraftId}`);
+      const contractRes = await fetch(`${API_URL}/contract-drafts/${reqData.contract_draft_id}`);
       if (!contractRes.ok) throw new Error('Contract not found');
       const contractData = await contractRes.json();
       setContract(contractData);
 
-      // Load signature requests for this contract
-      const reqRes = await fetch(`http://localhost:8000/api/v1/signature-requests/${contractDraftId}`);
-      if (reqRes.ok) {
-        const requests = await reqRes.json();
-        setSignatureRequests(requests);
+      // Validate status
+      if (reqData.status === 'signed') {
+        setError('This contract has already been signed');
+      } else if (reqData.status === 'declined') {
+        setError('This signature request was declined');
+      } else if (reqData.status === 'expired') {
+        setError('This signature request has expired');
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to load contract');
+      setError(err.message || 'Failed to load signature request');
     } finally {
       setLoading(false);
     }
@@ -119,6 +136,11 @@ export default function SignContractPage() {
       return;
     }
 
+    if (!signatureRequest || !token) {
+      setError('Invalid signature request');
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -128,13 +150,7 @@ export default function SignContractPage() {
     try {
       const signatureData = canvas.toDataURL();
 
-      // Get first pending signature request (simplified - in production, match by email)
-      const pendingRequest = signatureRequests.find(req => req.status === 'pending');
-      if (!pendingRequest) {
-        throw new Error('No pending signature request found');
-      }
-
-      const res = await fetch(`http://localhost:8000/api/v1/signature-requests/${pendingRequest.id}/sign`, {
+      const res = await fetch(`${API_URL}/signature-requests/${requestId}/sign?token=${encodeURIComponent(token)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -153,7 +169,7 @@ export default function SignContractPage() {
 
       // Redirect after 3 seconds
       setTimeout(() => {
-        router.push('/');
+        window.location.href = 'https://closeware.com';
       }, 3000);
 
     } catch (err: any) {
@@ -205,7 +221,7 @@ export default function SignContractPage() {
             Sign Contract
           </h1>
           <p style={{ color: '#6B6B63' }}>
-            Please review the contract below and provide your signature
+            {signatureRequest ? `Hi ${signatureRequest.signer_name}, please review the contract below and provide your signature` : 'Please review the contract below and provide your signature'}
           </p>
         </div>
 
