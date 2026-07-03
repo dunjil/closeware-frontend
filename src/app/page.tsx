@@ -167,7 +167,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="animate-fade-in">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-5" style={{ color: "#D4A017" }}>
-                M&A Deal Execution Platform
+                AI-Powered Contract Verification
               </p>
               <h1 className="text-[2.6rem] sm:text-[3.5rem] lg:text-[4rem] leading-[1.05] tracking-tight" style={{ fontFamily: "var(--font-heading)", fontWeight: 300 }}>
                 Never sign a contract
@@ -175,7 +175,7 @@ export default function HomePage() {
                 that <em className="not-italic" style={{ fontStyle: "italic", color: "#D4A017" }}>doesn't match reality.</em>
               </h1>
               <p className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-sm" style={{ color: "#4A4A45", fontFamily: "var(--font-body)" }}>
-                Generate verified contracts from your negotiation trail. Instant discrepancy detection. One-click fixes. Digital signing with full audit trail.
+                Upload your contract and deal trail. Get instant verification showing every discrepancy. Fix what doesn't match. Sign with confidence.
               </p>
               <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3">
                 <Link href="/register" className="h-12 sm:h-[52px] px-6 sm:px-8 text-sm sm:text-[15px] font-medium rounded-lg inline-flex items-center justify-center hover:scale-[1.02] transition-transform" style={{ background: "#D4A017", color: "#fff" }}>
@@ -221,28 +221,28 @@ export default function HomePage() {
       <section id="how-it-works" className="py-16 sm:py-28" style={{ borderTop: "1px solid #E8E6E0" }}>
         <div className="max-w-4xl mx-auto px-5 sm:px-6">
           <h2 className="text-center text-3xl sm:text-4xl tracking-tight mb-4" style={{ fontFamily: "var(--font-heading)", fontWeight: 400 }}>
-            From negotiation trail to verified contract.
+            Verify your contract against reality.
           </h2>
           <p className="text-center text-sm sm:text-base mb-12 sm:mb-16" style={{ color: "#6B6B63" }}>
-            Three steps that replace manual verification.
+            Upload what you already have. See every discrepancy. Fix what doesn't match.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               {
                 step: "01",
-                title: "Collect your trail",
-                body: "Upload offer letters, counter-offers, emails, and title documents. Everything organized in one deal record.",
+                title: "Upload your deal trail",
+                body: "Upload emails, offer letters, counter-offers, and supporting documents. Everything organized in one place.",
               },
               {
                 step: "02",
-                title: "Generate or upload contract",
-                body: "AI drafts the complete SPA, JV agreement, or NDA from your trail — or upload an existing draft for verification.",
+                title: "Upload your contract",
+                body: "Upload your existing draft (Word, PDF, Google Doc) or paste contract text. Most teams already draft contracts — we verify them.",
               },
               {
                 step: "03",
-                title: "Fix discrepancies instantly",
-                body: "See what matched, what's flagged, what's missing. Apply suggested fixes with one click or regenerate the entire contract.",
+                title: "Get instant verification",
+                body: "See what matched ✅, what's flagged ⚠️, what's missing ❌. Every discrepancy shown with suggested fixes. Apply or regenerate with AI.",
               },
             ].map((item, i) => (
               <div key={i} className="p-8 rounded-xl ring-1 ring-[#E8E6E0] bg-white relative">
@@ -271,9 +271,9 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
-              { title: "Asset Acquisitions", body: "Property, real estate, filling stations. Every title document cross-checked against the final SPA." },
-              { title: "M&A & Joint Ventures", body: "Multi-party negotiations with complex terms reconciled into definitive agreements." },
-              { title: "Energy & Resources", body: "Oil & gas concessions and mining rights verified against licenses and ownership records." },
+              { title: "Asset Acquisitions", body: "Property, real estate, commercial assets. Every title document cross-checked against the final SPA." },
+              { title: "M&A & Joint Ventures", body: "Multi-party negotiations with complex terms verified against email trails and offer letters." },
+              { title: "Cross-Border Deals", body: "International transactions verified across multiple currencies, jurisdictions, and document sets." },
             ].map((f, i) => (
               <div key={i} className="p-6 rounded-xl ring-1 ring-[#E8E6E0] bg-[#FAF9F6]">
                 <h3 className="text-sm font-semibold mb-1.5" style={{ color: "#1A1A18" }}>{f.title}</h3>
@@ -293,7 +293,7 @@ export default function HomePage() {
             <em style={{ fontStyle: "italic", color: "#D4A017" }}>doesn't match reality.</em>
           </h2>
           <p className="text-base leading-relaxed mb-10 max-w-md mx-auto" style={{ color: "#4A4A45" }}>
-            Every deal document — verified against your full negotiation trail. AI-generated, AI-verified, AI-fixed.
+            Upload your contract. Upload your deal trail. Get instant verification showing every discrepancy. Fix what doesn't match.
           </p>
           <Link href="/register" className="h-12 sm:h-[52px] px-6 sm:px-8 text-sm sm:text-[15px] font-medium rounded-lg inline-flex items-center justify-center hover:opacity-90 transition-opacity" style={{ background: "#D4A017", color: "#fff" }}>
             Start free trial
