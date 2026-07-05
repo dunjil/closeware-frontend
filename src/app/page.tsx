@@ -220,7 +220,7 @@ export default function HomePage() {
                   See how it works
                 </a>
               </div>
-              <p className="text-xs mt-4" style={{ color: "#8A8880" }}>Free 14-day trial. No credit card required.</p>
+              <p className="text-xs mt-4" style={{ color: "#8A8880" }}>Free 30-day trial. No credit card required.</p>
             </div>
 
             <div className="flex justify-center lg:justify-end animate-slide-up" style={{ animationDelay: "200ms" }}>
