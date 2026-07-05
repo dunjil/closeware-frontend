@@ -75,7 +75,7 @@ export default function InviteSignupPage({ params }: { params: { token: string }
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#FAF9F6' }}>
         <div className="max-w-md w-full mx-4">
           <div className="rounded-xl p-8 text-center" style={{ background: '#FFFFFF', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-            <div className="text-5xl mb-4">⚠️</div>
+            <div className="text-5xl mb-4"></div>
             <h1 className="text-2xl mb-4" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#C0392B' }}>
               Invalid Invitation
             </h1>
@@ -136,8 +136,8 @@ export default function InviteSignupPage({ params }: { params: { token: string }
                   className="w-full px-4 py-2.5 border rounded-lg text-[15px] bg-gray-50"
                   style={{ borderColor: '#E8E6E0', color: '#6B6B63' }}
                 />
-                <span className="absolute right-3 top-3 text-xs px-2 py-1 rounded" style={{ background: 'rgba(74,124,89,0.08)', color: '#4A7C59' }}>
-                  ✓ Verified
+                <span className="absolute right-3 top-3 text-xs px-2 py-1 rounded font-medium" style={{ background: 'rgba(74,124,89,0.08)', color: '#4A7C59' }}>
+                  Verified
                 </span>
               </div>
             </div>

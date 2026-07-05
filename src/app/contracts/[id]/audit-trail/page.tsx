@@ -161,16 +161,53 @@ export default function AuditTrailPage() {
                 style={{ color: '#6B6B63' }}>
             ← Back to Contract
           </Link>
-          <h1 className="text-3xl mb-2" style={{ fontFamily: 'var(--font-heading)', color: '#1A1A18' }}>
-            Audit Trail
-          </h1>
-          <p style={{ color: '#6B6B63' }}>{auditTrail.contract_title}</p>
-          <div className="mt-4 flex items-center gap-3">
-            <span className="text-xs uppercase tracking-wider" style={{ color: '#8A8880' }}>Current Status:</span>
-            <span className="px-3 py-1 rounded-full text-xs font-medium"
-                  style={{ background: `${getStatusColor(auditTrail.current_status)}15`, color: getStatusColor(auditTrail.current_status) }}>
-              {formatStatus(auditTrail.current_status)}
-            </span>
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-3xl mb-2" style={{ fontFamily: 'var(--font-heading)', color: '#1A1A18' }}>
+                Audit Trail
+              </h1>
+              <p style={{ color: '#6B6B63' }}>{auditTrail.contract_title}</p>
+              <div className="mt-4 flex items-center gap-3">
+                <span className="text-xs uppercase tracking-wider" style={{ color: '#8A8880' }}>Current Status:</span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium"
+                      style={{ background: `${getStatusColor(auditTrail.current_status)}15`, color: getStatusColor(auditTrail.current_status) }}>
+                  {formatStatus(auditTrail.current_status)}
+                </span>
+              </div>
+            </div>
+
+            {/* Export Buttons */}
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  const token = localStorage.getItem('access_token');
+                  window.open(`${API_URL}/audit-trail/${contractId}/export/pdf`, '_blank');
+                }}
+                className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+                style={{ background: '#D4A017', color: '#fff' }}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                </svg>
+                Export as PDF
+              </button>
+              <button
+                onClick={() => {
+                  const token = localStorage.getItem('access_token');
+                  window.open(`${API_URL}/audit-trail/${contractId}/export/docx`, '_blank');
+                }}
+                className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 border hover:bg-gray-50 transition-colors"
+                style={{ borderColor: '#E8E6E0', color: '#1A1A18' }}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                </svg>
+                Export as DOCX
+              </button>
+              <p className="text-xs text-center mt-1" style={{ color: '#8A8880' }}>
+                Court-admissible format
+              </p>
+            </div>
           </div>
         </div>
 
@@ -312,13 +349,13 @@ export default function AuditTrailPage() {
                             Signer: {(event.data as SignatureRequest).signer_name} ({(event.data as SignatureRequest).signer_email})
                           </p>
                           {(event.data as SignatureRequest).signed_at && (
-                            <p className="text-sm" style={{ color: '#4A7C59' }}>
-                              ✓ Signed: {formatDate((event.data as SignatureRequest).signed_at!)}
+                            <p className="text-sm font-medium" style={{ color: '#4A7C59' }}>
+                              Signed: {formatDate((event.data as SignatureRequest).signed_at!)}
                             </p>
                           )}
                           {(event.data as SignatureRequest).declined_at && (
-                            <p className="text-sm" style={{ color: '#C0392B' }}>
-                              ✗ Declined: {formatDate((event.data as SignatureRequest).declined_at!)}
+                            <p className="text-sm font-medium" style={{ color: '#C0392B' }}>
+                              Declined: {formatDate((event.data as SignatureRequest).declined_at!)}
                             </p>
                           )}
                         </div>

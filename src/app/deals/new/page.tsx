@@ -172,7 +172,7 @@ export default function NewDealPage() {
                   onChange={(e) => setFormData({ ...formData, buyer_name: e.target.value })}
                   className="w-full px-4 py-2.5 border rounded-lg text-[15px]"
                   style={{ borderColor: "#E8E6E0" }}
-                  placeholder="ASEDO Energy Group"
+                  placeholder="Acme Corporation"
                   disabled={loading}
                 />
               </div>

@@ -267,7 +267,7 @@ export default function GenerateOfferLetterModal({
               disabled={loading}
               className="px-6 py-3 rounded-lg disabled:opacity-50"
               style={{ background: '#D4A017', color: '#fff' }}>
-              {loading ? 'Generating...' : '✨ Generate with AI'}
+              {loading ? 'Generating...' : ' Generate with AI'}
             </button>
           ) : (
             <button
@@ -275,7 +275,7 @@ export default function GenerateOfferLetterModal({
               disabled={loading}
               className="px-6 py-3 rounded-lg disabled:opacity-50"
               style={{ background: '#4A7C59', color: '#fff' }}>
-              {loading ? 'Saving...' : '✓ Save Letter'}
+              {loading ? 'Saving...' : 'Save Letter'}
             </button>
           )}
         </div>

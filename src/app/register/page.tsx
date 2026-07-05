@@ -111,7 +111,7 @@ export default function RegisterPage() {
                 required
                 className="w-full px-4 py-2.5 border rounded-lg text-[15px]"
                 style={{ borderColor: "#E8E6E0" }}
-                placeholder="ASEDO Energy Group"
+                placeholder="Acme Corporation"
                 disabled={loading}
               />
             </div>
@@ -125,7 +125,7 @@ export default function RegisterPage() {
                 required
                 className="w-full px-4 py-2.5 border rounded-lg text-[15px]"
                 style={{ borderColor: "#E8E6E0" }}
-                placeholder="Duna Jilang"
+                placeholder="John Smith"
                 disabled={loading}
               />
             </div>

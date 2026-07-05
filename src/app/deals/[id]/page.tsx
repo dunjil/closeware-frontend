@@ -304,7 +304,7 @@ export default function DealPage({ params }: { params: { id: string } }) {
                 className="h-10 px-6 rounded-lg text-sm font-medium border"
                 style={{ borderColor: "#E8E6E0", color: "#6B6B63" }}
               >
-                ✨ Generate Offer Letter
+                 Generate Offer Letter
               </button>
               <button
                 onClick={() => setShowInviteModal(true)}
@@ -478,7 +478,7 @@ export default function DealPage({ params }: { params: { id: string } }) {
                   className="h-10 px-6 rounded-lg text-sm font-medium disabled:opacity-50"
                   style={{ background: "#D4A017", color: "#fff" }}
                 >
-                  {generatingContract ? 'Generating...' : '✨ Generate Contract with AI'}
+                  {generatingContract ? 'Generating...' : ' Generate Contract with AI'}
                 </button>
                 <button onClick={() => setShowAddForm(true)} className="h-10 px-6 rounded-lg text-sm font-medium border" style={{ borderColor: "#E8E6E0", color: "#4A4A45" }}>
                   Add Manual Draft
@@ -652,7 +652,7 @@ export default function DealPage({ params }: { params: { id: string } }) {
                   Generate an AI-powered contract from your deal trail or add a manual draft
                 </p>
                 <button onClick={handleGenerateContract} disabled={generatingContract} className="h-10 px-6 rounded-lg text-sm font-medium" style={{ background: "#D4A017", color: "#fff" }}>
-                  {generatingContract ? 'Generating...' : '✨ Generate with AI'}
+                  {generatingContract ? 'Generating...' : ' Generate with AI'}
                 </button>
               </div>
             )}
