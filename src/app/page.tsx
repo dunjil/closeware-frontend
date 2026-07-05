@@ -304,10 +304,10 @@ export default function HomePage() {
                   boxShadow: "0 1px 3px rgba(0,0,0,0.04)"
                 }}
               >
-                {/* Step number above title */}
-                <div className="mb-4">
+                {/* Number and icon on same line */}
+                <div className="flex items-center justify-between mb-6">
                   <span
-                    className="text-5xl block leading-none"
+                    className="text-5xl leading-none"
                     style={{
                       fontFamily: "var(--font-mono)",
                       color: "rgba(212,160,23,0.25)",
@@ -316,14 +316,12 @@ export default function HomePage() {
                   >
                     {item.step}
                   </span>
-                </div>
-
-                {/* Icon with animation */}
-                <div
-                  className="mb-5 transition-transform duration-500 group-hover:scale-110"
-                  style={{ color: "#D4A017" }}
-                >
-                  {item.icon}
+                  <div
+                    className="transition-transform duration-500 group-hover:scale-110"
+                    style={{ color: "#D4A017" }}
+                  >
+                    {item.icon}
+                  </div>
                 </div>
 
                 {/* Content */}
