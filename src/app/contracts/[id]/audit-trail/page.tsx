@@ -313,12 +313,12 @@ export default function AuditTrailPage() {
                           </p>
                           {(event.data as SignatureRequest).signed_at && (
                             <p className="text-sm" style={{ color: '#4A7C59' }}>
-                              ✓ Signed: {formatDate((event.data as SignatureRequest).signed_at)}
+                              ✓ Signed: {formatDate((event.data as SignatureRequest).signed_at!)}
                             </p>
                           )}
                           {(event.data as SignatureRequest).declined_at && (
                             <p className="text-sm" style={{ color: '#C0392B' }}>
-                              ✗ Declined: {formatDate((event.data as SignatureRequest).declined_at)}
+                              ✗ Declined: {formatDate((event.data as SignatureRequest).declined_at!)}
                             </p>
                           )}
                         </div>
