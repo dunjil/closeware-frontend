@@ -9,6 +9,7 @@ import AddContractDraftForm from '@/components/AddContractDraftForm';
 import SignatureCanvas from '@/components/SignatureCanvas';
 import InternalReviewPanel from '@/components/InternalReviewPanel';
 import InviteExternalUserModal from '@/components/InviteExternalUserModal';
+import GenerateOfferLetterModal from '@/components/GenerateOfferLetterModal';
 import { useToast } from '@/hooks/useToast';
 import { exportContractToPDF } from '@/lib/pdfExport';
 import { exportContractToDOCX } from '@/lib/docxExport';
@@ -34,6 +35,7 @@ export default function DealPage({ params }: { params: { id: string } }) {
   const [showSignatureModal, setShowSignatureModal] = useState<{ draftId: string; isBuyer: boolean } | null>(null);
   const [signatures, setSignatures] = useState<Record<string, Signature[]>>({});
   const [showInviteModal, setShowInviteModal] = useState(false);
+  const [showOfferLetterModal, setShowOfferLetterModal] = useState(false);
   const { showToast, ToastContainer } = useToast();
 
   const loadDealData = async () => {
@@ -296,13 +298,22 @@ export default function DealPage({ params }: { params: { id: string } }) {
               )}
             </div>
 
-            <button
-              onClick={() => setShowInviteModal(true)}
-              className="h-10 px-6 rounded-lg text-sm font-medium"
-              style={{ background: "#D4A017", color: "#fff" }}
-            >
-              Invite External Reviewer
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowOfferLetterModal(true)}
+                className="h-10 px-6 rounded-lg text-sm font-medium border"
+                style={{ borderColor: "#E8E6E0", color: "#6B6B63" }}
+              >
+                ✨ Generate Offer Letter
+              </button>
+              <button
+                onClick={() => setShowInviteModal(true)}
+                className="h-10 px-6 rounded-lg text-sm font-medium"
+                style={{ background: "#D4A017", color: "#fff" }}
+              >
+                Invite External Reviewer
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -824,6 +835,18 @@ export default function DealPage({ params }: { params: { id: string } }) {
           }}
           onCancel={() => setShowInviteModal(false)}
           showToast={showToast}
+        />
+      )}
+
+      {/* Offer Letter Modal */}
+      {showOfferLetterModal && (
+        <GenerateOfferLetterModal
+          dealId={params.id}
+          onClose={() => setShowOfferLetterModal(false)}
+          onSuccess={() => {
+            loadDealData();
+            showToast('Offer letter saved successfully', 'success');
+          }}
         />
       )}
 
