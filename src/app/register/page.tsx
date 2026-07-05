@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Header from '@/components/Header';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -85,14 +86,16 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: "#FAF9F6" }}>
-      <div className="w-full max-w-lg">
-        <div className="text-center mb-8">
-          <Link href="/" className="text-[32px] font-light tracking-tight inline-block mb-3" style={{ fontFamily: "var(--font-heading)" }}>
-            Close<span style={{ color: "#D4A017" }} className="font-medium">ware</span>
-          </Link>
-          <p className="text-sm" style={{ color: "#6B6B63" }}>Start your free 30-day trial</p>
-        </div>
+    <div className="min-h-screen" style={{ background: "#FAF9F6" }}>
+      <Header />
+      <div className="min-h-screen flex items-center justify-center p-6 pt-24">
+        <div className="w-full max-w-lg">
+          <div className="text-center mb-8">
+            <h1 className="text-[32px] font-light tracking-tight inline-block mb-3" style={{ fontFamily: "var(--font-heading)" }}>
+              Get Started
+            </h1>
+            <p className="text-sm" style={{ color: "#6B6B63" }}>Start your free 30-day trial</p>
+          </div>
 
         <div className="bg-white rounded-xl p-8 ring-1 ring-[#E8E6E0] animate-fade-in">
           {error && (

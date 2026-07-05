@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Header from '@/components/Header';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -43,11 +44,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: "#FAF9F6" }}>
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Link href="/" className="text-[32px] font-light tracking-tight inline-block mb-3" style={{ fontFamily: "var(--font-heading)" }}>
-            Close<span style={{ color: "#D4A017" }} className="font-medium">ware</span>
+    <div className="min-h-screen" style={{ background: "#FAF9F6" }}>
+      <Header />
+      <div className="min-h-screen flex items-center justify-center p-6 pt-24">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <h1 className="text-[32px] font-light tracking-tight inline-block mb-3" style={{ fontFamily: "var(--font-heading)" }}>
+              Sign In
           </Link>
           <p className="text-sm" style={{ color: "#6B6B63" }}>Sign in to your account</p>
         </div>
