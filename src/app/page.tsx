@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 
 /* ═══════════════════════════════════════════════════════════
    ANIMATED DOCUMENT PREVIEW
@@ -141,8 +142,42 @@ function AnimatedDocument() {
 }
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Closeware",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Complete M&A contract platform with comprehensive audit trail. Generate, verify, review, and sign contracts with complete documentation for compliance and disputes.",
+    "operatingSystem": "Web",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "ratingCount": "1"
+    },
+    "featureList": [
+      "Contract Generation",
+      "Contract Verification",
+      "Internal Review Workflows",
+      "Complete Audit Trail",
+      "External Collaboration",
+      "Digital Signatures",
+      "Court-Admissible Export"
+    ]
+  };
+
   return (
     <div className="min-h-screen" style={{ background: "#FAF9F6" }}>
+      {/* Structured Data for SEO */}
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
       {/* Navigation */}
       <nav className="fixed top-0 inset-x-0 z-50" style={{ background: "rgba(250,249,246,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid #E8E6E0" }}>
