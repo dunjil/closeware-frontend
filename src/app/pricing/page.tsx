@@ -2,18 +2,21 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 export default function PricingPage() {
+  const { formatCurrency, currency, config } = useCurrency();
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
 
+  // All prices in USD
   const tiers = [
     {
       name: 'Lite',
       id: 'lite',
-      monthlyPrice: 75000,
-      annualPrice: 750000,
+      monthlyPrice: 500,
+      annualPrice: 5000,
       includedDeals: billingPeriod === 'monthly' ? 1 : 12,
-      overagePrice: 60000,
+      overagePrice: 400,
       features: [
         '1 deal per month included',
         'Up to 3 team members',
@@ -27,10 +30,10 @@ export default function PricingPage() {
     {
       name: 'Pro',
       id: 'pro',
-      monthlyPrice: 150000,
-      annualPrice: 1500000,
+      monthlyPrice: 2000,
+      annualPrice: 20000,
       includedDeals: billingPeriod === 'monthly' ? 2 : 24,
-      overagePrice: 50000,
+      overagePrice: 800,
       features: [
         '2 deals per month included',
         'Up to 5 team members',
@@ -46,10 +49,10 @@ export default function PricingPage() {
     {
       name: 'Enterprise',
       id: 'enterprise',
-      monthlyPrice: 500000,
-      annualPrice: 5000000,
+      monthlyPrice: 8000,
+      annualPrice: 80000,
       includedDeals: billingPeriod === 'monthly' ? 10 : 120,
-      overagePrice: 40000,
+      overagePrice: 600,
       features: [
         '10 deals per month included',
         'Unlimited team members',
@@ -67,8 +70,8 @@ export default function PricingPage() {
     return billingPeriod === 'monthly' ? tier.monthlyPrice : tier.annualPrice;
   };
 
-  const formatPrice = (price: number) => {
-    return `₦${(price / 1000).toFixed(0)}K`;
+  const formatPriceDisplayDisplay = (priceUSD: number) => {
+    return formatCurrency(priceUSD, { compact: true, decimals: 0 });
   };
 
   return (
@@ -158,7 +161,7 @@ export default function PricingPage() {
               <div className="mb-6">
                 <div className="flex items-baseline mb-2">
                   <span className="text-4xl font-light" style={{ fontFamily: 'var(--font-mono)', color: '#1A1A18' }}>
-                    {formatPrice(getPrice(tier))}
+                    {formatPriceDisplay(getPrice(tier))}
                   </span>
                   <span className="ml-2 text-sm" style={{ color: '#6B6B63' }}>
                     /{billingPeriod === 'monthly' ? 'month' : 'year'}
@@ -168,7 +171,7 @@ export default function PricingPage() {
                   {tier.includedDeals} deal{tier.includedDeals > 1 ? 's' : ''} included
                 </p>
                 <p className="text-xs mt-1" style={{ color: '#8A8880' }}>
-                  + {formatPrice(tier.overagePrice)} per additional deal
+                  + {formatPriceDisplay(tier.overagePrice)} per additional deal
                 </p>
               </div>
 
@@ -222,11 +225,11 @@ export default function PricingPage() {
               },
               {
                 q: 'What payment methods do you accept?',
-                a: 'Bank transfer and Paystack (for online payments). Invoices are sent monthly with 30-day payment terms.',
+                a: 'Credit card, bank transfer, and wire transfer. Enterprise customers can request invoicing with NET 30 payment terms.',
               },
               {
-                q: 'Is VAT included?',
-                a: 'No. Prices are exclusive of 7.5% VAT (Nigerian tax). VAT will be added to your invoice.',
+                q: 'Are prices shown in my local currency?',
+                a: `Yes. Prices are automatically shown in ${config.name} (${config.code}). All billing is processed in USD and converted at the time of payment.`,
               },
             ].map((faq, idx) => (
               <div key={idx} className="rounded-xl p-6" style={{ background: '#FFFFFF', border: '1px solid #E8E6E0' }}>

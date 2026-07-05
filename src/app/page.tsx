@@ -210,7 +210,7 @@ export default function HomePage() {
                 <span style={{ color: "#D4A017" }}>Sign with confidence.</span>
               </h1>
               <p className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-sm" style={{ color: "#4A4A45", fontFamily: "var(--font-body)" }}>
-                Complete M&A contract workflow with comprehensive audit trail. Generate, verify, review, and sign—with complete documentation for compliance and disputes.
+                Never sign a contract that doesn't match what was agreed. Complete audit trail for every M&A deal.
               </p>
               <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3">
                 <Link href="/register" className="h-12 sm:h-[52px] px-6 sm:px-8 text-sm sm:text-[15px] font-medium rounded-lg inline-flex items-center justify-center hover:scale-[1.02] transition-transform" style={{ background: "#D4A017", color: "#fff" }}>
@@ -232,21 +232,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Platform Capabilities */}
       <section className="py-16 sm:py-20" style={{ borderTop: "1px solid #E8E6E0", background: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto px-5 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             <div>
-              <div className="text-5xl font-light mb-2" style={{ fontFamily: "var(--font-mono)", color: "#D4A017" }}>$500M+</div>
-              <p className="text-sm" style={{ color: "#6B6B63" }}>Deal value verified</p>
+              <div className="text-5xl font-light mb-2" style={{ fontFamily: "var(--font-mono)", color: "#D4A017" }}>7</div>
+              <p className="text-sm" style={{ color: "#6B6B63" }}>Complete platform features</p>
             </div>
             <div>
-              <div className="text-5xl font-light mb-2" style={{ fontFamily: "var(--font-mono)", color: "#D4A017" }}>100%</div>
-              <p className="text-sm" style={{ color: "#6B6B63" }}>Accuracy guarantee</p>
+              <div className="text-5xl font-light mb-2" style={{ fontFamily: "var(--font-mono)", color: "#D4A017" }}>30</div>
+              <p className="text-sm" style={{ color: "#6B6B63" }}>Day free trial</p>
             </div>
             <div>
               <div className="text-5xl font-light mb-2" style={{ fontFamily: "var(--font-mono)", color: "#D4A017" }}>&lt;5min</div>
-              <p className="text-sm" style={{ color: "#6B6B63" }}>Average verification</p>
+              <p className="text-sm" style={{ color: "#6B6B63" }}>Contract verification time</p>
             </div>
           </div>
         </div>
