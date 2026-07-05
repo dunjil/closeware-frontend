@@ -22,8 +22,8 @@ export default function PaywallModal({ isOpen, reason, onClose }: PaywallModalPr
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl max-w-md w-full p-8 ring-1"
-        style={{ ringColor: '#E8E6E0' }}
+        className="bg-white rounded-2xl max-w-md w-full p-8"
+        style={{ border: '1px solid #E8E6E0' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Icon */}
