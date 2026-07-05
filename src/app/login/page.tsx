@@ -51,9 +51,9 @@ export default function LoginPage() {
           <div className="text-center mb-8">
             <h1 className="text-[32px] font-light tracking-tight inline-block mb-3" style={{ fontFamily: "var(--font-heading)" }}>
               Sign In
-          </Link>
-          <p className="text-sm" style={{ color: "#6B6B63" }}>Sign in to your account</p>
-        </div>
+            </h1>
+            <p className="text-sm" style={{ color: "#6B6B63" }}>Sign in to your account</p>
+          </div>
 
         <div className="bg-white rounded-xl p-8 ring-1 ring-[#E8E6E0] animate-fade-in">
           {error && (
