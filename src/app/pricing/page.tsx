@@ -70,7 +70,7 @@ export default function PricingPage() {
     return billingPeriod === 'monthly' ? tier.monthlyPrice : tier.annualPrice;
   };
 
-  const formatPriceDisplayDisplay = (priceUSD: number) => {
+  const formatPriceDisplay = (priceUSD: number) => {
     return formatCurrency(priceUSD, { compact: true, decimals: 0 });
   };
 
