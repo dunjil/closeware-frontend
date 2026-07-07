@@ -119,6 +119,7 @@ export default function LoginPage() {
             ← Back to home
           </Link>
         </div>
+        </div>
       </div>
     </div>
   );
