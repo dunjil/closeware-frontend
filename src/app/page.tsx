@@ -135,7 +135,7 @@ function AnimatedDocument() {
 
         {/* Status */}
         <div className={`flex items-center justify-between pb-3 transition-all duration-600 ease-out ${show(10)}`}>
-          <p className="text-[10px] text-[#8A8880]">RADIC-REIGN-2026-042 · Closeware</p>
+          <p className="text-[10px] text-[#8A8880]">RADIC-ATLAS-2026-042 · Closeware</p>
           <span className="text-[10px] font-semibold text-[#4A7C59] bg-[rgba(74,124,89,0.08)] px-3 py-1 rounded-full uppercase tracking-wider">Verified</span>
         </div>
       </div>

@@ -168,7 +168,7 @@ export default function NewDealPage() {
                 required
                 className="w-full px-4 py-2.5 border rounded-lg text-[15px]"
                 style={{ borderColor: "#E8E6E0" }}
-                placeholder="Reign Restaurant Property Acquisition"
+                placeholder="Summit Restaurant Property Acquisition"
                 disabled={loading || checkingLimit || (usageData && !usageData.can_create_deal)}
               />
             </div>
