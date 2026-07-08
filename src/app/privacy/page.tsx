@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function PrivacyPage() {
   return (
@@ -339,44 +340,7 @@ export default function PrivacyPage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t mt-16" style={{ borderColor: '#E8E6E0', background: '#F5F3EE' }}>
-        <div className="max-w-5xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-lg mb-4" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
-                Close<span style={{ color: '#D4A017' }}>ware</span>
-              </h3>
-              <p className="text-sm" style={{ color: '#6B6B63' }}>
-                Track every change. Sign with confidence.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold mb-4" style={{ color: '#1A1A18' }}>Product</h4>
-              <ul className="space-y-2 text-sm" style={{ color: '#6B6B63' }}>
-                <li><Link href="/pricing">Pricing</Link></li>
-                <li><Link href="/#how-it-works">How it works</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold mb-4" style={{ color: '#1A1A18' }}>Legal</h4>
-              <ul className="space-y-2 text-sm" style={{ color: '#6B6B63' }}>
-                <li><Link href="/terms">Terms of Service</Link></li>
-                <li><Link href="/privacy" style={{ color: '#D4A017' }}>Privacy Policy</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold mb-4" style={{ color: '#1A1A18' }}>Contact</h4>
-              <ul className="space-y-2 text-sm" style={{ color: '#6B6B63' }}>
-                <li><a href="mailto:info@closeware.com">info@closeware.com</a></li>
-                <li><a href="tel:+2348100620010">+234 810 062 0010</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="text-center text-sm pt-8" style={{ borderTop: '1px solid #E8E6E0', color: '#8A8880' }}>
-            <p>&copy; 2026 Closeware. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
+import Footer from "@/components/Footer";
 
 /* ═══════════════════════════════════════════════════════════
    ANIMATED DOCUMENT PREVIEW
@@ -768,21 +769,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-10" style={{ borderTop: "1px solid #E8E6E0" }}>
-        <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="text-lg font-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
-              Close<span style={{ color: "#D4A017" }} className="font-medium">ware</span>
-            </p>
-            <p className="text-xs mt-1" style={{ color: "#8A8880" }}>Deal verification for M&A and asset acquisitions.</p>
-          </div>
-          <div className="flex items-center gap-6 text-xs" style={{ color: "#8A8880" }}>
-            <Link href="/privacy" className="hover:text-[#4A4A45] transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-[#4A4A45] transition-colors">Terms</Link>
-            <Link href="/contact" className="hover:text-[#4A4A45] transition-colors">Contact</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
     </div>
   );
