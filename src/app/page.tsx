@@ -777,9 +777,9 @@ export default function HomePage() {
             <p className="text-xs mt-1" style={{ color: "#8A8880" }}>Deal verification for M&A and asset acquisitions.</p>
           </div>
           <div className="flex items-center gap-6 text-xs" style={{ color: "#8A8880" }}>
-            <Link href="#" className="hover:text-[#4A4A45] transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-[#4A4A45] transition-colors">Terms</Link>
-            <Link href="#" className="hover:text-[#4A4A45] transition-colors">Contact</Link>
+            <Link href="/privacy" className="hover:text-[#4A4A45] transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-[#4A4A45] transition-colors">Terms</Link>
+            <Link href="/contact" className="hover:text-[#4A4A45] transition-colors">Contact</Link>
           </div>
         </div>
       </footer>
