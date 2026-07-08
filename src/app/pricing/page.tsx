@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Note: Page-level metadata must be in a separate metadata.ts file or in a Server Component
+// This is a Client Component, so metadata should be added via layout or moved to a Server Component wrapper
+
 export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
 

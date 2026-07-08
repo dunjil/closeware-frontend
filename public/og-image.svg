@@ -1,0 +1,55 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#FAF9F6"/>
+
+  <!-- Grid pattern (subtle) -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E8E6E0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.3"/>
+
+  <!-- Logo (enlarged version) -->
+  <g transform="translate(100, 180)">
+    <!-- Document -->
+    <rect x="0" y="0" width="120" height="160" rx="8" fill="#1A1A18" stroke="#D4A017" stroke-width="3"/>
+    <!-- Lines -->
+    <line x1="20" y1="30" x2="70" y2="30" stroke="#FAF9F6" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="50" x2="90" y2="50" stroke="#FAF9F6" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="70" x2="80" y2="70" stroke="#FAF9F6" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="90" x2="70" y2="90" stroke="#FAF9F6" stroke-width="3" stroke-linecap="round"/>
+    <!-- Signature line -->
+    <line x1="20" y1="125" x2="90" y2="125" stroke="#D4A017" stroke-width="2" stroke-dasharray="3 3"/>
+    <!-- Seal -->
+    <circle cx="85" cy="135" r="30" fill="#D4A017"/>
+    <circle cx="85" cy="135" r="27" fill="#1A1A18"/>
+    <circle cx="85" cy="135" r="24" fill="#D4A017"/>
+    <!-- Checkmark -->
+    <path d="M 72 135 L 80 143 L 98 125" stroke="#1A1A18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Text Content -->
+  <text x="280" y="260" font-family="'Georgia', serif" font-size="72" font-weight="300" fill="#1A1A18">
+    Close<tspan font-weight="500" fill="#D4A017">ware</tspan>
+  </text>
+
+  <text x="280" y="340" font-family="'system-ui', sans-serif" font-size="36" fill="#1A1A18">
+    Track Every Change.
+  </text>
+
+  <text x="280" y="390" font-family="'system-ui', sans-serif" font-size="36" fill="#1A1A18">
+    Sign With Confidence.
+  </text>
+
+  <text x="280" y="470" font-family="'system-ui', sans-serif" font-size="24" fill="#6B6B63">
+    Complete M&amp;A contract platform with
+  </text>
+
+  <text x="280" y="510" font-family="'system-ui', sans-serif" font-size="24" fill="#6B6B63">
+    comprehensive audit trail
+  </text>
+
+  <!-- Bottom accent -->
+  <rect x="0" y="600" width="1200" height="30" fill="#D4A017" opacity="0.1"/>
+</svg>
