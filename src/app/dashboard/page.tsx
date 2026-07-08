@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { api, Deal } from '@/lib/api';
 import Link from 'next/link';
+import DealUsageWidget from '@/components/DealUsageWidget';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -79,6 +80,9 @@ export default function DashboardPage() {
             {deals.length === 0 ? "No active deals." : `${deals.length} active deal${deals.length !== 1 ? 's' : ''}.`}
           </p>
         </div>
+
+        {/* Deal Usage Widget */}
+        <DealUsageWidget />
 
         {/* New Deal Button */}
         <div>

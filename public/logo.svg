@@ -1,0 +1,21 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Document background -->
+  <rect x="25" y="15" width="70" height="90" rx="4" fill="#1A1A18" stroke="#D4A017" stroke-width="2"/>
+
+  <!-- Document lines (representing contract text) -->
+  <line x1="35" y1="30" x2="65" y2="30" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="35" y1="40" x2="75" y2="40" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="35" y1="50" x2="70" y2="50" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="35" y1="60" x2="65" y2="60" stroke="#FAF9F6" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Signature line -->
+  <line x1="35" y1="80" x2="75" y2="80" stroke="#D4A017" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+
+  <!-- Verification seal (gold circle with checkmark) -->
+  <circle cx="75" cy="75" r="22" fill="#D4A017"/>
+  <circle cx="75" cy="75" r="20" fill="#1A1A18"/>
+  <circle cx="75" cy="75" r="18" fill="#D4A017"/>
+
+  <!-- Checkmark inside seal -->
+  <path d="M 68 75 L 72 79 L 82 69" stroke="#1A1A18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

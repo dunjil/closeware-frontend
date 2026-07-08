@@ -5,6 +5,7 @@ import { Providers } from "@/components/Providers";
 export const metadata: Metadata = {
   title: "Closeware - Track Every Change. Sign With Confidence.",
   description: "Complete M&A contract platform with comprehensive audit trail. Generate, verify, review, and sign—with complete documentation for compliance and disputes. Court-admissible export for legal proceedings.",
+  manifest: '/site.webmanifest',
   keywords: [
     "M&A contract management",
     "audit trail",
@@ -65,8 +66,18 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'icon', url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { rel: 'icon', url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
   },
 };
 

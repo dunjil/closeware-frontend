@@ -1,17 +1,23 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 
 export default function PricingPage() {
-  // Pay-per-deal tiers (tiered by complexity)
-  const dealTiers = [
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+
+  const pricingTiers = [
     {
-      name: 'Simple Contracts',
-      price: 500,
-      examples: ['NDAs', 'Service agreements', 'Simple sales contracts'],
+      id: 'free',
+      name: 'Free',
+      description: 'Perfect for trying Closeware',
+      monthlyPrice: 0,
+      yearlyPrice: 0,
+      dealLimit: billingPeriod === 'monthly' ? 2 : 24,
       features: [
-        'Contract generation from deal trail',
+        '2 deals per month',
+        'Contract generation',
         'Instant verification',
         'Internal review workflow',
         'Digital signatures',
@@ -20,262 +26,300 @@ export default function PricingPage() {
       ],
     },
     {
-      name: 'Property Acquisitions',
-      price: 2500,
-      examples: ['Real estate purchases', 'Commercial property', 'Land acquisitions'],
+      id: 'pro',
+      name: 'Pro',
+      description: 'For individuals and small teams',
+      monthlyPrice: 99,
+      yearlyPrice: 950,
+      dealLimit: billingPeriod === 'monthly' ? 20 : 240,
+      savings: 238,
       features: [
-        'All Simple Contract features',
-        'Title document verification',
-        'Multi-party coordination',
-        'External collaborator access',
+        '20 deals per month',
+        'Everything in Free',
         'Priority support',
+        'Unlimited revisions per deal',
+        'Advanced analytics',
+        'Export templates',
       ],
       recommended: true,
     },
     {
-      name: 'M&A & Joint Ventures',
-      price: 10000,
-      examples: ['Corporate acquisitions', 'Joint venture agreements', 'Multi-entity deals'],
+      id: 'team',
+      name: 'Team',
+      description: 'For growing businesses',
+      monthlyPrice: 299,
+      yearlyPrice: 2850,
+      dealLimit: billingPeriod === 'monthly' ? 100 : 1200,
+      savings: 738,
       features: [
-        'All Property Acquisition features',
-        'Complex multi-party negotiations',
-        'Due diligence document tracking',
+        '100 deals per month',
+        'Everything in Pro',
+        'Team collaboration (multiple users)',
+        'Role-based permissions',
+        'Dedicated account manager',
         'Custom contract templates',
-        'Dedicated account support',
+        'Monthly strategy calls',
       ],
+    },
+    {
+      id: 'enterprise',
+      name: 'Enterprise',
+      description: 'For large organizations',
+      monthlyPrice: null,
+      yearlyPrice: null,
+      dealLimit: null,
+      features: [
+        'Unlimited deals',
+        'Everything in Team',
+        'Custom integrations',
+        'API access',
+        'SLA guarantee (24hr response)',
+        'White-glove onboarding',
+        'Custom compliance requirements',
+        'Dedicated infrastructure',
+      ],
+      contactSales: true,
     },
   ];
 
-  // Prepaid deal packs (for high-volume customers)
-  const prepaidPacks = [
-    {
-      name: 'Starter Pack',
-      deals: 5,
-      price: 11000,
-      regularPrice: 12500,
-      savings: 'Save $1,500',
-      features: [
-        '5 deals (any type)',
-        'Valid for 12 months',
-        'Priority support',
-        'Quarterly check-ins',
-      ],
-      bestFor: 'Small teams doing 5-10 deals/year',
-    },
-    {
-      name: 'Growth Pack',
-      deals: 15,
-      price: 30000,
-      regularPrice: 37500,
-      savings: 'Save $7,500',
-      features: [
-        '15 deals (any type)',
-        'Valid for 12 months',
-        'Priority support',
-        'Monthly strategy calls',
-        'Dedicated success manager',
-      ],
-      bestFor: 'Mid-market teams doing 15-25 deals/year',
-      recommended: true,
-    },
-    {
-      name: 'Enterprise Pack',
-      deals: 50,
-      price: 90000,
-      regularPrice: 125000,
-      savings: 'Save $35,000',
-      features: [
-        '50 deals (any type)',
-        'Valid for 12 months',
-        'Dedicated account manager',
-        'SLA guarantee (24hr response)',
-        'Custom integrations',
-        'White-glove onboarding',
-      ],
-      bestFor: 'Large enterprises & PE funds doing 50+ deals/year',
-    },
-  ];
+  const getPrice = (tier: typeof pricingTiers[0]) => {
+    if (tier.contactSales) return 'Custom';
+    const price = billingPeriod === 'monthly' ? tier.monthlyPrice : tier.yearlyPrice;
+    return price === 0 ? 'Free' : `$${price?.toLocaleString()}`;
+  };
+
+  const getPeriodLabel = () => {
+    return billingPeriod === 'monthly' ? '/month' : '/year';
+  };
 
   return (
     <div className="min-h-screen" style={{ background: '#FAF9F6' }}>
       <Header />
 
       {/* Hero */}
-      <div className="max-w-4xl mx-auto px-5 pt-24 pb-16 text-center">
+      <div className="max-w-4xl mx-auto px-5 pt-24 pb-12 text-center">
         <h1 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
           Simple, Transparent Pricing
         </h1>
-        <p className="text-xl mb-4" style={{ color: '#6B6B63' }}>
-          Pay per deal. No monthly fees. No credit card required to start.
+        <p className="text-xl mb-8" style={{ color: '#6B6B63' }}>
+          Choose the plan that fits your needs. Upgrade or downgrade anytime.
         </p>
-        <p className="text-base" style={{ color: '#8A8880' }}>
-          30-day free trial • Cancel anytime • All prices in USD
-        </p>
+
+        {/* Billing Toggle */}
+        <div className="inline-flex items-center gap-3 p-1 rounded-xl" style={{ background: '#F5F3EE' }}>
+          <button
+            onClick={() => setBillingPeriod('monthly')}
+            className="px-6 py-2.5 text-sm font-medium rounded-lg transition-all"
+            style={{
+              background: billingPeriod === 'monthly' ? '#fff' : 'transparent',
+              color: billingPeriod === 'monthly' ? '#1A1A18' : '#6B6B63',
+              boxShadow: billingPeriod === 'monthly' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+            }}
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => setBillingPeriod('yearly')}
+            className="px-6 py-2.5 text-sm font-medium rounded-lg transition-all relative"
+            style={{
+              background: billingPeriod === 'yearly' ? '#fff' : 'transparent',
+              color: billingPeriod === 'yearly' ? '#1A1A18' : '#6B6B63',
+              boxShadow: billingPeriod === 'yearly' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+            }}
+          >
+            Yearly
+            <span
+              className="absolute -top-2 -right-2 text-[10px] px-2 py-0.5 rounded-full font-medium"
+              style={{ background: '#D4A017', color: '#fff' }}
+            >
+              Save 20%
+            </span>
+          </button>
+        </div>
       </div>
 
-      {/* Pay-Per-Deal Pricing */}
+      {/* Pricing Cards */}
       <div className="max-w-7xl mx-auto px-5 pb-24">
-        <div className="mb-16">
-          <h2 className="text-3xl mb-3 text-center" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
-            Pay Per Deal
-          </h2>
-          <p className="text-center text-base mb-12" style={{ color: '#6B6B63' }}>
-            One flat fee per contract. Pricing based on deal complexity.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {dealTiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`rounded-2xl p-8 relative ${tier.recommended ? 'border-2' : 'border'}`}
-                style={{
-                  background: '#FFFFFF',
-                  borderColor: tier.recommended ? '#D4A017' : '#E8E6E0',
-                  boxShadow: tier.recommended ? '0 8px 32px rgba(212,160,23,0.15)' : '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              >
-                {tier.recommended && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="text-xs px-4 py-1.5 rounded-full font-medium" style={{ background: '#D4A017', color: '#fff' }}>
-                      MOST POPULAR
-                    </span>
-                  </div>
-                )}
-
-                <div className="mb-6">
-                  <h3 className="text-2xl mb-2" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
-                    {tier.name}
-                  </h3>
-                  <div className="flex items-baseline mb-3">
-                    <span className="text-5xl font-light" style={{ fontFamily: 'var(--font-mono)', color: '#1A1A18' }}>
-                      ${tier.price.toLocaleString()}
-                    </span>
-                    <span className="ml-2 text-sm" style={{ color: '#6B6B63' }}>
-                      per deal
-                    </span>
-                  </div>
-                  <div className="mb-4">
-                    <p className="text-xs uppercase tracking-wider mb-2" style={{ color: '#8A8880' }}>Examples:</p>
-                    {tier.examples.map((example, idx) => (
-                      <p key={idx} className="text-sm mb-1" style={{ color: '#6B6B63' }}>
-                        • {example}
-                      </p>
-                    ))}
-                  </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {pricingTiers.map((tier) => (
+            <div
+              key={tier.id}
+              className={`rounded-2xl p-8 relative flex flex-col ${tier.recommended ? 'border-2' : 'border'}`}
+              style={{
+                background: '#FFFFFF',
+                borderColor: tier.recommended ? '#D4A017' : '#E8E6E0',
+                boxShadow: tier.recommended ? '0 8px 32px rgba(212,160,23,0.15)' : '0 2px 8px rgba(0,0,0,0.04)',
+              }}
+            >
+              {tier.recommended && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="text-xs px-4 py-1.5 rounded-full font-medium" style={{ background: '#D4A017', color: '#fff' }}>
+                    MOST POPULAR
+                  </span>
                 </div>
+              )}
 
-                <Link
-                  href="/register"
-                  className={`block w-full h-12 rounded-lg text-sm font-medium flex items-center justify-center mb-6 transition-colors ${
-                    tier.recommended ? '' : 'border'
-                  }`}
-                  style={
-                    tier.recommended
-                      ? { background: '#D4A017', color: '#fff' }
-                      : { borderColor: '#E8E6E0', color: '#4A4A45', background: 'transparent' }
-                  }
-                >
-                  Start Free Trial
-                </Link>
+              <div className="mb-6">
+                <h3 className="text-2xl mb-2" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
+                  {tier.name}
+                </h3>
+                <p className="text-sm mb-4" style={{ color: '#6B6B63' }}>
+                  {tier.description}
+                </p>
 
-                <ul className="space-y-3">
-                  {tier.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start text-sm" style={{ color: '#4A4A45' }}>
-                      <svg className="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                <div className="mb-4">
+                  <div className="flex items-baseline mb-1">
+                    <span className="text-4xl font-light" style={{ fontFamily: 'var(--font-mono)', color: '#1A1A18' }}>
+                      {getPrice(tier)}
+                    </span>
+                    {!tier.contactSales && tier.monthlyPrice !== 0 && (
+                      <span className="ml-2 text-sm" style={{ color: '#6B6B63' }}>
+                        {getPeriodLabel()}
+                      </span>
+                    )}
+                  </div>
+
+                  {tier.savings && billingPeriod === 'yearly' && (
+                    <p className="text-xs" style={{ color: '#4A7C59' }}>
+                      Save ${tier.savings}/year
+                    </p>
+                  )}
+
+                  {tier.dealLimit && (
+                    <p className="text-sm mt-2" style={{ color: '#8A8880' }}>
+                      {tier.dealLimit} deals{billingPeriod === 'yearly' ? '/year' : '/month'}
+                    </p>
+                  )}
+                  {tier.dealLimit === null && (
+                    <p className="text-sm mt-2" style={{ color: '#8A8880' }}>
+                      Unlimited deals
+                    </p>
+                  )}
+                </div>
               </div>
-            ))}
+
+              <Link
+                href={tier.contactSales ? '/contact' : '/register'}
+                className={`block w-full h-12 rounded-lg text-sm font-medium flex items-center justify-center mb-6 transition-colors ${
+                  tier.recommended ? '' : 'border'
+                }`}
+                style={
+                  tier.recommended
+                    ? { background: '#D4A017', color: '#fff' }
+                    : { borderColor: '#E8E6E0', color: '#4A4A45', background: 'transparent' }
+                }
+              >
+                {tier.contactSales ? 'Contact Sales' : tier.id === 'free' ? 'Get Started Free' : 'Start Free Trial'}
+              </Link>
+
+              <ul className="space-y-3 flex-grow">
+                {tier.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start text-sm" style={{ color: '#4A4A45' }}>
+                    <svg className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Feature Comparison Table */}
+        <div className="mt-24">
+          <h2 className="text-3xl mb-12 text-center" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
+            Compare Plans
+          </h2>
+
+          <div className="overflow-x-auto">
+            <table className="w-full" style={{ borderCollapse: 'separate', borderSpacing: 0 }}>
+              <thead>
+                <tr style={{ background: '#F5F3EE' }}>
+                  <th className="text-left p-4 text-sm font-medium" style={{ color: '#1A1A18' }}>Feature</th>
+                  <th className="text-center p-4 text-sm font-medium" style={{ color: '#1A1A18' }}>Free</th>
+                  <th className="text-center p-4 text-sm font-medium" style={{ color: '#1A1A18' }}>Pro</th>
+                  <th className="text-center p-4 text-sm font-medium" style={{ color: '#1A1A18' }}>Team</th>
+                  <th className="text-center p-4 text-sm font-medium" style={{ color: '#1A1A18' }}>Enterprise</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { feature: 'Deals per month', free: '2', pro: '20', team: '100', enterprise: 'Unlimited' },
+                  { feature: 'Contract generation', free: true, pro: true, team: true, enterprise: true },
+                  { feature: 'Instant verification', free: true, pro: true, team: true, enterprise: true },
+                  { feature: 'Digital signatures', free: true, pro: true, team: true, enterprise: true },
+                  { feature: 'Audit trail export', free: true, pro: true, team: true, enterprise: true },
+                  { feature: 'Priority support', free: false, pro: true, team: true, enterprise: true },
+                  { feature: 'Team collaboration', free: false, pro: false, team: true, enterprise: true },
+                  { feature: 'Custom templates', free: false, pro: false, team: true, enterprise: true },
+                  { feature: 'Dedicated account manager', free: false, pro: false, team: true, enterprise: true },
+                  { feature: 'API access', free: false, pro: false, team: false, enterprise: true },
+                  { feature: 'SLA guarantee', free: false, pro: false, team: false, enterprise: true },
+                  { feature: 'Custom integrations', free: false, pro: false, team: false, enterprise: true },
+                ].map((row, idx) => (
+                  <tr key={idx} style={{ borderBottom: '1px solid #E8E6E0' }}>
+                    <td className="p-4 text-sm" style={{ color: '#4A4A45' }}>{row.feature}</td>
+                    <td className="p-4 text-sm text-center">
+                      {typeof row.free === 'boolean' ? (
+                        row.free ? (
+                          <svg className="w-5 h-5 mx-auto" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span style={{ color: '#D5D3CC' }}>—</span>
+                        )
+                      ) : (
+                        <span style={{ color: '#1A1A18' }}>{row.free}</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-sm text-center">
+                      {typeof row.pro === 'boolean' ? (
+                        row.pro ? (
+                          <svg className="w-5 h-5 mx-auto" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span style={{ color: '#D5D3CC' }}>—</span>
+                        )
+                      ) : (
+                        <span style={{ color: '#1A1A18' }}>{row.pro}</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-sm text-center">
+                      {typeof row.team === 'boolean' ? (
+                        row.team ? (
+                          <svg className="w-5 h-5 mx-auto" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span style={{ color: '#D5D3CC' }}>—</span>
+                        )
+                      ) : (
+                        <span style={{ color: '#1A1A18' }}>{row.team}</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-sm text-center">
+                      {typeof row.enterprise === 'boolean' ? (
+                        row.enterprise ? (
+                          <svg className="w-5 h-5 mx-auto" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <span style={{ color: '#D5D3CC' }}>—</span>
+                        )
+                      ) : (
+                        <span style={{ color: '#1A1A18' }}>{row.enterprise}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
-        {/* Prepaid Deal Packs */}
-        <div className="mt-32 mb-16">
-          <h2 className="text-3xl mb-3 text-center" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
-            Prepaid Deal Packs
-          </h2>
-          <p className="text-center text-base mb-12" style={{ color: '#6B6B63' }}>
-            For high-volume customers. Pay upfront and save on every deal.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {prepaidPacks.map((pack) => (
-              <div
-                key={pack.name}
-                className={`rounded-2xl p-8 relative ${pack.recommended ? 'border-2' : 'border'}`}
-                style={{
-                  background: '#FFFFFF',
-                  borderColor: pack.recommended ? '#D4A017' : '#E8E6E0',
-                  boxShadow: pack.recommended ? '0 8px 32px rgba(212,160,23,0.15)' : '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              >
-                {pack.recommended && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="text-xs px-4 py-1.5 rounded-full font-medium" style={{ background: '#D4A017', color: '#fff' }}>
-                      BEST VALUE
-                    </span>
-                  </div>
-                )}
-
-                <div className="mb-6">
-                  <h3 className="text-2xl mb-2" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
-                    {pack.name}
-                  </h3>
-                  <div className="flex items-baseline mb-2">
-                    <span className="text-5xl font-light" style={{ fontFamily: 'var(--font-mono)', color: '#1A1A18' }}>
-                      ${pack.price.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="mb-3">
-                    <div className="inline-block px-3 py-1 rounded-full text-sm font-medium" style={{ background: 'rgba(74, 124, 89, 0.1)', color: '#4A7C59' }}>
-                      {pack.savings}
-                    </div>
-                  </div>
-                  <p className="text-xs line-through mb-1" style={{ color: '#8A8880' }}>
-                    Regular: ${pack.regularPrice.toLocaleString()}
-                  </p>
-                  <p className="text-sm font-medium mb-3" style={{ color: '#1A1A18' }}>
-                    {pack.deals} deals included
-                  </p>
-                  <p className="text-xs" style={{ color: '#6B6B63' }}>
-                    {pack.bestFor}
-                  </p>
-                </div>
-
-                <Link
-                  href="/register"
-                  className={`block w-full h-12 rounded-lg text-sm font-medium flex items-center justify-center mb-6 transition-colors ${
-                    pack.recommended ? '' : 'border'
-                  }`}
-                  style={
-                    pack.recommended
-                      ? { background: '#D4A017', color: '#fff' }
-                      : { borderColor: '#E8E6E0', color: '#4A4A45', background: 'transparent' }
-                  }
-                >
-                  {pack.deals >= 50 ? 'Contact Sales' : 'Get Started'}
-                </Link>
-
-                <ul className="space-y-3">
-                  {pack.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start text-sm" style={{ color: '#4A4A45' }}>
-                      <svg className="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="#4A7C59" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* FAQ Section */}
+        {/* FAQ */}
         <div className="mt-24 max-w-3xl mx-auto">
           <h2 className="text-3xl mb-12 text-center" style={{ fontFamily: 'var(--font-heading)', fontWeight: 400, color: '#1A1A18' }}>
             Frequently Asked Questions
@@ -284,28 +328,28 @@ export default function PricingPage() {
           <div className="space-y-6">
             {[
               {
-                q: 'How does pay-per-deal pricing work?',
-                a: 'You only pay when you generate and close a deal. No monthly fees, no recurring charges. Just a one-time fee per contract based on deal complexity.',
+                q: 'What happens if I hit my deal limit?',
+                a: 'You\'ll be prompted to upgrade to a higher tier. Don\'t worry - your existing deals remain accessible, you just can\'t create new ones until you upgrade or wait for your next billing period.',
+              },
+              {
+                q: 'Can I change plans anytime?',
+                a: 'Yes! Upgrade instantly at any time. If you downgrade, the change takes effect at the end of your current billing period.',
               },
               {
                 q: 'What counts as a "deal"?',
-                a: 'Each contract generation counts as one deal. Regenerations and revisions to the same contract are free. You only pay once per deal, regardless of how many iterations.',
+                a: 'Each unique contract/agreement counts as one deal. You can revise and regenerate the same deal unlimited times - it only counts once.',
               },
               {
-                q: 'What are prepaid deal packs?',
-                a: 'Prepaid packs let you pay upfront for multiple deals at a discounted rate. For example, the Growth Pack includes 15 deals for $30,000 (normally $37,500), saving you $7,500. Packs are valid for 12 months and work with any deal type.',
+                q: 'Do yearly plans save money?',
+                a: 'Yes! Yearly plans save ~20% compared to paying monthly. Pro yearly is $950 (vs $1,188 monthly), Team yearly is $2,850 (vs $3,588 monthly).',
               },
               {
-                q: 'When do I get charged?',
-                a: 'You are charged when you mark a contract as "ready for signature" or when all parties sign. If you abandon a deal before this stage, you are not charged.',
+                q: 'Is there a free trial?',
+                a: 'Yes! All paid plans come with a 30-day free trial. No credit card required to start. The Free plan is always free with no trial needed.',
               },
               {
                 q: 'What payment methods do you accept?',
-                a: 'Credit card, bank transfer, and wire transfer. Enterprise customers can request invoicing with NET 30 payment terms. All billing is in USD.',
-              },
-              {
-                q: 'Can I cancel anytime?',
-                a: 'Yes. Pay-per-deal has no commitment. Annual subscriptions can be cancelled with 30 days notice. Unused funds are not refunded.',
+                a: 'Credit card, debit card, and bank transfer. Enterprise customers can request invoicing with NET 30 payment terms.',
               },
             ].map((faq, idx) => (
               <div key={idx} className="rounded-xl p-6" style={{ background: '#FFFFFF', border: '1px solid #E8E6E0' }}>
@@ -326,10 +370,10 @@ export default function PricingPage() {
             Ready to get started?
           </h2>
           <p className="text-lg mb-8" style={{ color: '#6B6B63' }}>
-            Start your 30-day free trial. No credit card required. No monthly fees.
+            Start with our free plan. No credit card required. Upgrade anytime.
           </p>
           <Link href="/register" className="inline-flex items-center h-12 px-8 rounded-lg text-sm font-medium" style={{ background: '#D4A017', color: '#fff' }}>
-            Start Free Trial
+            Get Started Free
           </Link>
         </div>
       </div>
